@@ -1,16 +1,22 @@
 ---
-name: Tails Azimuth
+name: Bisakh Mondal
 avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+occupation: Computer Science Student
+company: Jadavpur University
+email: bisakhmondal00@gmail.com
+github: https://github.com/bisakhmondal
+twitter: https://twitter.com/ibisakh
+linkedin: https://www.linkedin.com/in/bisakh-mondal
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+Bisakh Mondal is a final year Computer Science & Engineering Student at Jadavpur University, India. He is hugely interested in distributed systems, backend engineering and cloud-native technologies. He has also built/worked with several distributed infrastructures.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
+He has worked with several state of the art programming languages but he likes to code in `Golang`, `C++`, `Python` and `Js`.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Here are a few social links to know him better as a programmer -
+
+Portfolio : [bisakh.com](https://bisakh.com)  
+GitHub : [bisakhmondal00](https://github.com/bisakhmondal00)  
+LinkedIn : [bisakh-mondal](https://www.linkedin.com/in/bisakh-mondal)
+
+Hope you have enjoyed his blog posts. Thanks.
