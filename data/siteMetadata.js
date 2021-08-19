@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: `Bisakh's Blog`,
   description: 'Welcome to my blog - drafts of thoughts from a wandering tech mind.',
   language: 'en-us',
-  siteUrl: 'blog.bisakh.com',
+  siteUrl: 'https://blog.bisakh.com',
   siteRepo: 'https://github.com/bisakhmondal/blog.bisakh',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
