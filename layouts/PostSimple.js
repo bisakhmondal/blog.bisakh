@@ -4,7 +4,7 @@ import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import formatDate from '@/lib/utils/formatDate'
-import Comments from '@/components/comments'
+// import Comments from '@/components/comments'
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
   const { date, title } = frontMatter
@@ -35,8 +35,12 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
           >
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
               <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">{children}</div>
+              <div className="grid grid-rows-1 grid-flow-col gap-4 pt-6 pb-4 text-sm text-gray-500 dark:text-gray-300">
+                <p className="nofollow row-span-1">Thank You!</p>
+                <p className="nofollow text-right col-span-1">50 views</p>
+              </div>
             </div>
-            <Comments frontMatter={frontMatter} />
+            {/* <Comments frontMatter={frontMatter} /> */}
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
                 {prev && (

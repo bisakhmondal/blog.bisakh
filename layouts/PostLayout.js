@@ -5,13 +5,7 @@ import { BlogSEO } from '@/components/SEO'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import Comments from '@/components/comments'
-
-const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
-const discussUrl = (slug) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+// import Comments from '@/components/comments'
 
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
@@ -66,14 +60,14 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                       <dl className="text-sm font-medium leading-5 whitespace-nowrap">
                         <dt className="sr-only">Name</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
+                        <dt className="sr-only">LinkedIn</dt>
                         <dd>
                           {author.twitter && (
                             <Link
-                              href={author.twitter}
+                              href={author.linkedin}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace('https://twitter.com/', '@')}
+                              {author.linkedin.replace('https://www.linkedin.com/in/', '@')}
                             </Link>
                           )}
                         </dd>
@@ -85,14 +79,10 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
               <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(slug)} rel="nofollow">
-                  {'Discuss on Twitter'}
-                </Link>
-                {` • `}
-                <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
+              <div className="pt-6 pb-6 text-sm text-gray-500 dark:text-gray-300">
+                <p className="nofollow">Thank You!</p>
               </div>
-              <Comments frontMatter={frontMatter} />
+              {/* <Comments frontMatter={frontMatter} /> */}
             </div>
             <footer>
               <div className="text-sm font-medium leading-5 divide-gray-200 xl:divide-y dark:divide-gray-700 xl:col-start-1 xl:row-start-2">
