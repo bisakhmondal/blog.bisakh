@@ -1,6 +1,6 @@
 ---
 title: 'GSoC 2021 with Chromium'
-date: '2021-08-19'
+date: '2021-08-20'
 tags: ['gsoc', 'development', 'open-source', 'chromium', 'golang']
 draft: false
 layout: PostSimple
@@ -17,7 +17,7 @@ summary: 'My experience and Work Summary as a Chromium GSoC Intern, 2021.'
   </div>
 </div>
 
-This post is about my GSoC project, **porting ChromeOS power policy end-to-end tests**, that I worked on during the summer, 2021. It gives a brief summary of my overall contribution to chromium from pre-GSoC to the end of GSoC as a requirement of the final evaluation. It all started in May 2021 with the community bonding. The sweet voyage comes to an end in August 2021 with an incredible learning experience, a lot of fun and some tricky challenges.
+This post is about my GSoC project, **porting ChromeOS power policy end-to-end tests**, that I worked on during the summer, 2021. It gives a brief summary of my overall contribution to Chromium from pre-GSoC to the end of GSoC as a requirement of the final evaluation. It all started in May 2021 with the community bonding. The sweet voyage comes to an end in August 2021 with an incredible learning experience, a lot of fun and some tricky challenges.
 
 ## Project Details
 
@@ -40,7 +40,7 @@ As a Chromium GSoC intern, my work is to migrate five power policy tests by unde
 **Mentors** 👨
 
 - Oleh Lamzin
-- Mahmoud Gawd
+- Mahmoud Gawad
 
 **Technology Used** : `golang`, `Tast`, `python`, `autotest`, `gRPC`
 
@@ -48,7 +48,7 @@ As a Chromium GSoC intern, my work is to migrate five power policy tests by unde
 
 ## Pre-GSoC Work
 
-As my project requires access to `Chromebooks` & `servos`, so the starter work that had been asked was a bit different for the initial evaluation. I was responsible for creating a `Gerrit` (Google Git) scraper in `golang` and content parser-analyser to index the commits and reviews made by the chromium authors using the chrome `CDP` (chrome devtools protocol). Without generically fetching the pages through `HTTP.GET`, in a nutshell, the program loads the page in a headless Chrome instance and communicates with it directly with devtools protocol (CDP). `Tast` heavily relies on CDP WebSocket connection for the required communication. Finally, it provides a CLI to fetch and parse commit messages, per author commit-review counts and a dockerfile with the build steps to run everything in an isolated containerized environment.
+As my project requires access to `Chromebooks` & `servos`, so the starter work that had been asked was a bit different for the initial evaluation. I was responsible for creating a `Gerrit` (Google Git) scraper in `golang` and content parser-analyser to index the commits and reviews made by the Chromium authors using the chrome `CDP` (chrome devtools protocol). Without generically fetching the pages through `HTTP.GET`, in a nutshell, the program loads the page in a headless Chrome instance and communicates with it directly with devtools protocol (CDP). `Tast` heavily relies on CDP WebSocket connection for the required communication. Finally, it provides a CLI to fetch and parse commit messages, per author commit-review counts and a dockerfile with the build steps to run everything in an isolated containerized environment.
 
 **Full Problem Details** : [GSoC - Port power policies end-to-end tests: starter bug](https://docs.google.com/document/d/1dxkJFTJ4RCUfmzl8AbNLtJPtH39Y8QOnnE4SVlRhwAY/edit?usp=sharing)
 
@@ -56,7 +56,7 @@ As my project requires access to `Chromebooks` & `servos`, so the starter work t
 
 ## Community Bonding Progress
 
-I had spent the whole three weeks setting up the ChromeOS development setup, creating a new chroot, building images, exploring the `Tast` framework, completing tast [codelabs](https://chromium.googlesource.com/chromiumos/platform/tast/+/HEAD/docs/README.md#first-steps) and also understanding the Chromium git-flow on a single monolithic repository. My mentor, Oleh, shared some bugs and I picked one ([chromium:1142132](https://bugs.chromium.org/p/chromium/issues/detail?id=1142132)) and started working on the fix to have a hands-on with the chromium Gerrit. Along the way, I also worked on implementing a `TODO` feature on `tast-lint`.
+I had spent the whole three weeks setting up the ChromeOS development setup, creating a new chroot, building images, exploring the `Tast` framework, completing tast [codelabs](https://chromium.googlesource.com/chromiumos/platform/tast/+/HEAD/docs/README.md#first-steps) and also understanding the Chromium git-flow on a single monolithic repository. My mentor, Oleh, shared some bugs and I picked one ([chromium:1142132](https://bugs.chromium.org/p/chromium/issues/detail?id=1142132)) and started working on the fix to have a hands-on with the Chromium Gerrit. Along the way, I also worked on implementing a `TODO` feature on `tast-lint`.
 
 ✅️ [CL:2919074](https://chromium-review.googlesource.com/c/chromiumos/platform/tast/+/2919074) : Better Handling of `fmt.Errorf` in `tast-lint`( Improvement over existing implementation by pruning the entire sub-parse-tree for `ast` selector expression with an ability to deal with complex scenarios. )
 
@@ -64,7 +64,7 @@ I had spent the whole three weeks setting up the ChromeOS development setup, cre
 
 ## Change Logs
 
-Here is the list of CLs with brief info that I worked on during the GSoC coding period from June 7 to August 16.
+Here is the list of CLs with brief info that I worked on during the coding period from June 7 to August 16.
 
 ✅️ [CL:3056633](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3056633) : **`servo` package migration from remote to common**. Remote tests rely on gRPC to communicate with DUT for policy testing but certainly, some cases only require a servo connection in local tests, e.g. test that doesn't require a restart. In my case, with this change, _PeakShift_, _BatterCharge_ & _AdvancedBatterCharge_ has been made possible to write as local tests.
 
@@ -84,7 +84,7 @@ Here is the list of CLs with brief info that I worked on during the GSoC coding 
 
 ---
 
-The planned GSoC milestones have been achieved with the aforelisted CLs. Out of curiosity, I spent some time implementing `DeviceRebootOnShutdown` policy tests and migrating Wilco DTC remote tests to local in tast with the required changes.
+The planned GSoC milestones have been achieved with the aforelisted CLs. Out of curiosity, I spent some time implementing `DeviceRebootOnShutdown` policy tests and migrating Wilco DTC remote tests to local in tast with the required changes. I would like to continue contributing to tast on this migration process from autotest.
 
 🚧 [CL:3080647](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3080647) : **Reboot on Shutdown Remote Policy Tests**. If enabled, the policy replaces all shutdown buttons in the UI with restart buttons.
 
@@ -98,8 +98,44 @@ The planned GSoC milestones have been achieved with the aforelisted CLs. Out of 
 
 [ **Notion Used** : ✅️ &rarr; CL has been Committed to `cros/main` Head, 🚧 &rarr; CL In-Review ]
 
-## End Note
+## Project Challenges
 
-So, in the end, a big thanks to Google and Chromium for this opportunity. I want to thank particularly my mentor, Oleh, for guiding me throughout the whole process, igniting cool ideas and for the awesome in-depth code reviews. This project itself was an interesting experience for me since it was entirely new. I've never worked at such an os and hardware level. Exploring and understanding two separate codebases was exhilarating. I got to learn how to write efficient, self-contained Go code.
+!! 🚨 _This section contains intricate details about the blockers and might be boring. Feel free to skip/skim the details._ 🚨 !!
+
+I had faced several challenges, uncertainties throughout the GSoC and this section explain some of them briefly. My project was on power policy integration tests so a test setup is a must to inspect the intended behaviour. And the policies being the power policy in nature, are dependent on battery charge drain utilities, so a physical device is mandatory as we can't run those tests in a `VM` (virtual machine) due to the battery being one of the hardware dependencies.  
+My test setup comprised of two Chromebooks where one acts as `Servo Host` and the other is the actual `DUT`, two V4 Servos (USB Type-A and USB Type-C) and a Micro Servo that is attached to the DUT logic board debug header to perform various hardware-level operations.  
+Regarding **my development environment**, I always used a `GCP`, Google Cloud Platform, instance (2 cores, 8 GB RAM, 300 GB SSD) for all the development. Initially, I tried everything locally, but due to network, hardware bottlenecks, thermal throttling, lack of enough storage space, it turned out to be a disaster during the ChromeOS dev setup. 🤡
+
+- **Remote Setup** : Due to the nationwide lockdown in June, the ChromeOS team couldn't drop the physical devices at my doorstep. My mentor, Oleh, gave me access to the required setup that I have mentioned earlier. All I had to do is borrow another GCP instance that acts as a proxy where the resources were available through `Reverse SSH Tunnelling`. I could use them from my dev instance through another `Local SSH Tunnelling` (an extra network hop).
+
+  - I allocated an instance at `asia-south1-c` (Mumbai, India), closest to my location for the proxy instance, thinking that the network latency would be lesser however it turns out it's quite the opposite later. I was getting painful `context.DeadlineExceeded` error repeatedly 😢 for all the code instruction that waits for DUT to reconnect after a reboot. The existing stable tests were also failing for the same issue.
+  - I, along with my mentor, knew something is wrong. We performed various debugging, changes in the way we are establishing `SSH`. Meanwhile, I was writing **"hacky"**, non-publication ready code to continue testing with the issue to minimize time wastage. It took _a month_ to figure out that the concern is with the GCP instance itself 😶. Later, I switched my proxy server location from Mumbai to `europe-west3-c` (Frankfurt, Germany), nearest to my mentor's location to mitigate the very same issue.
+  - Lately, I was facing massive connection drops. The resources were inaccessible through the middle proxy. Instead of exposing DUT and Servo Host to the proxy server, Oleh took some time and exposed his `raspberry-pi` into the proxy server. Due to this, I was able to do remote port forwarding directly into my dev setup, exposing all the required resources and avoiding an extra connection hop.
+
+- **Servo** : Three servos offer a different set of commands to communicate through `servod` via `xmlrpc`.
+
+  - There was no documentation on available commands exposed by the micro servo and servo v4. Also, autotest lacks documentation on device setup and I didn't have physical access to the servos. So it was a bit of a challenge to identify the commands based upon the requirements and figure out the potential combination of servos connected to the DUT.
+  - Servo `v4p1` has the ability to act as a replacement of DUT charger and fiddle with servo power delivery (PD) through `servo_pd_role` command with two modes `src` for charging and `snk` for discharging. Initially, a bug was encountered where I wasn't able to flip PD role from _snk_ to _src_ neither via `servo package` nor through `dut-control`. It costs us a prolonged, troublesome firmware update on the servos.
+
+- **Dev Setup** : There was an instance where to resolve a merge conflict I performed a `repo sync` and an update on my chroot. It shattered my entire dev setup💥. Suddenly I was not able to apply any policies due to the enrollment fixture was failing with an error :
+
+  ```log
+  2021-08-01T14:54:03.360004Z [14:54:03.359] Error at enrolled_fixture.go:110: Failed to enroll using Chrome: rpc error: code = Unknown desc = failed to start chrome: login failed: could not enroll: context deadline exceeded; last error follows: Enterprise Enrollment login screen not found
+  2021-08-01T14:54:03.360057Z [14:54:03.359] Stack trace:
+  Failed to enroll using Chrome
+          at chromiumos/tast/remote/policyutil.(*enrolledFixt).SetUp (enrolled_fixture.go:110)
+          at chromiumos/tast/internal/planner.(*statefulFixture).RunSetUp.func1 (fixt.go:396)
+          at chromiumos/tast/internal/planner.safeCall.func2 (safe.go:92)
+          at runtime.goexit (asm_amd64.s:1374)
+  rpc error: code = Unknown desc = failed to start chrome: login failed: could not enroll: context deadline exceeded; last error follows: Enterprise Enrollment login screen not found
+  ```
+
+  I rebuilt the new packages and built an image (`R94-14126.0.2`) with the latest changes to flash it into the DUT, `drallion` board. But it didn't work. Later, Oleh flashed a prebuilt stable image `R94-14131.0.0` and solved the issue.
+
+**As it is evident, these blockers cost a significant amount of time during my project. Also, it taught me to explore different solutions to tackle such adversaries. It led me to explore the details of different parts of the tast framework that probably I wouldn't have gone through without these scenarios. Some of the packages are tremendously well written, especially the [testexec](https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/tast-tests/src/chromiumos/tast/common/testexec/testexec.go), [linuxssh](https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/tast/src/chromiumos/tast/internal/linuxssh/;bpv=0), [rpc](https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/tast/src/chromiumos/tast/internal/rpc/;bpv=0), [servo](https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/tast-tests/src/chromiumos/tast/common/servo/) etc.**
+
+## Acknowledgement
+
+I would like to thank my mentors Oleh and Mahmoud for their support and all the help. I am thankful to Oleh for being the person to be reached out anytime for any discussion, guiding me throughout the whole process, igniting cool ideas and for the awesome in-depth code reviews. It never felt like a remote internship. This project itself was an interesting experience for me since it was entirely new. I've never worked before with such kinds of tools interacting with different OS services and hardware. Exploring and understanding two separate codebases was exhilarating. I got to learn how to write efficient, self-contained Go code. Finally, a big thanks to Google Open Source, Google Summer of Code and Chromium for this opportunity.
 
 This GSoC is ending but Chromium has won a new contributor. I hope it's just the beginning of a new story.
