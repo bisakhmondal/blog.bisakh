@@ -114,8 +114,19 @@ Regarding **my development environment**, I always used a `GCP`, Google Cloud Pl
 
 - **Servo** : Three servos offer a different set of commands to communicate through `servod` via `xmlrpc`.
 
-  - There was no documentation on available commands exposed by the micro servo and servo v4. Also, autotest lacks documentation on device setup and I didn't have physical access to the servos. So it was a bit of a challenge to identify the commands based upon the requirements and figure out the potential combination of servos connected to the DUT.
-  - Servo `v4p1` has the ability to act as a replacement of DUT charger and fiddle with servo power delivery (PD) through `servo_pd_role` command with two modes `src` for charging and `snk` for discharging. Initially, a bug was encountered where I wasn't able to flip PD role from _snk_ to _src_ neither via `servo package` nor through `dut-control`. It costs us a prolonged, troublesome firmware update on the servos.
+  - There was no documentation on available commands exposed by the `micro` servo and servo `v4`. Also, autotest lacks documentation on device setup and I didn't have physical access to the servos. So it was a bit of a challenge to identify the commands based upon the requirements and figure out the potential combination of servos connected to the DUT. Later, the servo setup that I used looks similar to the figure shown below. The _"Labstation or Workstation"_ is the `Servo Host`.
+  <div className="flex flex-wrap justify-center	 -mx-2 overflow-hidden xl:-mx-2 py-8">
+    <div className="my-1 px-2 overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+      <Image alt="gsoc" src="/static/images/v4.png" width={400} height={300 } />
+    </div>
+    <div className="my-1 px-2 overflow-hidden xl:my-1 xl:px-2 xl:w-1/2 ml-6">
+      <Image alt="chromium" src="/static/images/v4p1.png" width={400} height={300} />
+    </div>
+  </div>
+
+  <h6 className="text-center py-4 text-xs	italic"> Source: [FAFT - Automated Firmware Testing](https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/faft-how-to-run-doc.md) </h6>
+
+  - Servo `v4p1` (Type-C) has the ability to act as a replacement of DUT charger and fiddle with servo power delivery (PD) through `servo_pd_role` command with two modes `src` for charging and `snk` for discharging. Initially, a bug was encountered where I wasn't able to flip PD role from _snk_ to _src_ neither via `servo package` nor through `dut-control`. It costs us a prolonged, troublesome firmware update on the servos.
 
 - **Dev Setup** : There was an instance where to resolve a merge conflict I performed a `repo sync` and an update on my chroot. It shattered my entire dev setup💥. Suddenly I was not able to apply any policies due to the enrollment fixture was failing with an error :
 
