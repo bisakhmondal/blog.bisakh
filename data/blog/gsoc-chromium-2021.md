@@ -88,17 +88,17 @@ The planned GSoC milestones have been achieved with the aforelisted CLs. Out of 
 
 🚧 [CL:3080647](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3080647) : **Reboot on Shutdown Remote Policy Tests**. If enabled, the policy replaces all shutdown buttons in the UI with restart buttons.
 
-🚧 [CL:3088795](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3088795) : **Wilco DTC Enrolled Fixtures**. Provides a fixture with `Wilco DTC VM` & `Supportd` daemon running returns chrome & fakedms object for policy enrollment.
+✅️ [CL:3088795](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3088795) : **Wilco DTC Enrolled Fixtures**. Provides a fixture with `Wilco DTC VM` & `Supportd` daemon running returns chrome & fakedms object for policy enrollment.
 
-🚧 [CL:3085093](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3085093) : Remote test migration to local of Wilco DTC `GetStatefulPartitionAvailableCapacity` gRPC method.
+✅️ [CL:3085093](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3085093) : Remote test migration to local of Wilco DTC `GetStatefulPartitionAvailableCapacity` gRPC method.
 
-🚧 [CL:3089877](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3089877) : Remote test migration to local of Wilco DTC `PerformWebRequest` gRPC method.
+✅️ [CL:3089877](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3089877) : Remote test migration to local of Wilco DTC `PerformWebRequest` gRPC method.
 
-🚧 [CL:3097629](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3097629) : Remote test migration to local of Wilco DTC `RunRoutineRequest` and `GetRoutineUpdate` gRPC methods.
+✅️ [CL:3097629](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3097629) : Remote test migration to local of Wilco DTC `RunRoutineRequest` and `GetRoutineUpdate` gRPC methods.
 
-🚧 [CL:3113185](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3113185) &nbsp;: Remote test migration to local of Wilco DTC `SendMessageToUi` gRPC methods new `wilcoDTCEnrolledExtensionSupport` fixture to perform enrollment along with wilco test extension support.
+✅️ [CL:3113185](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3113185) &nbsp;: Remote test migration to local of Wilco DTC `SendMessageToUi` gRPC methods new `wilcoDTCEnrolledExtensionSupport` fixture to perform enrollment along with wilco test extension support.
 
-🚧 [CL:3113192](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3113192) &nbsp;: Remote test migration to local of Wilco DTC `HandleMessageFromUi` gRPC method.
+✅️ [CL:3113192](https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/3113192) &nbsp;: Remote test migration to local of Wilco DTC `HandleMessageFromUi` gRPC method.
 
 [ **Notion Used** : ✅️ &rarr; CL has been Committed to `cros/main` Head, 🚧 &rarr; CL In-Review ]
 
