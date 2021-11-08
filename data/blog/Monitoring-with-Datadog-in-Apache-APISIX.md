@@ -175,15 +175,14 @@ Similarly there are few attributes that can be tweaked while enabling the plugin
 As all the fields are optional and if no attributes are set, the datadog plugin gets instantiated with the default values. To update any attribute, just update the required route/service/consumer with the updated attribute value. e.g.
 
 ```shell
-`{
+'{
 ...
 "plugins": {
     "datadog": {
         "batch_max_size": 10
     }
 }
-...
-}`
+... }'
 ```
 
 <hr />
