@@ -4,7 +4,7 @@ date: '2021-11-08'
 tags: ['datadog', 'dogstatsd', 'monitoring', 'open-source', 'Apache', 'APISIX']
 draft: false
 layout: PostSimple
-images: ['/static/images/apisix.png', '/static/images/datadog.png']
+images: ['/static/images/datadog.png', '/static/images/apisix.png']
 summary: 'Integration of Datadog with Apache APISIX for metrics collection.'
 ---
 
