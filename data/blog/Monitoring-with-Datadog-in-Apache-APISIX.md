@@ -1,10 +1,11 @@
 ---
 title: 'Monitoring with Datadog in Apache APISIX'
 date: '2021-11-08'
+lastmod: '2021-11-09'
 tags: ['datadog', 'dogstatsd', 'monitoring', 'open-source', 'Apache', 'APISIX']
 draft: false
 layout: PostSimple
-images: ['/static/images/datadog.png', '/static/images/apisix.png']
+images: ['/static/images/datadog.png']
 summary: 'Integration of Datadog with Apache APISIX for metrics collection.'
 ---
 
@@ -17,29 +18,27 @@ summary: 'Integration of Datadog with Apache APISIX for metrics collection.'
   </div>
 </div>
 
-Monitoring is an integral part of any application delivery. It is mainly because the complexity of IT products and consumer-facing application development is increasing day by day. Additionally, to meet the endless demand of rapid upgrade cycles while ensuring stability, streamlined performance and keeping a perfect balance between SLIs with SLOs and SLAs - effective monitoring is immensely important.
+As the complexity of IT products and consumer-facing application development increases, monitoring becomes an integral part of any application delivery. Additionally, to meet the endless demand of rapid upgrade cycles while ensuring stability, streamlined performance and keeping a perfect balance between SLIs with SLOs and SLAs - effective monitoring is immensely important.
 
-`Apache APISIX` decouples observability concerns from the application itself which gives the developers an advantage of building applications focussing just only on the business logic when APISIX will take care of observability for the platform of their choice. This article talks about the recent addition of a new plugin `datadog` to integrate widely used monitoring and analytics tool [Datadog](https://www.datadoghq.com/) into the Apache APISIX monitoring suite.
+`Apache APISIX` decouples observability concerns from the application, which gives the developers an advantage of building applications focussing just only on the business logic when APISIX will take care of observability for the platform of their choice. This article talks about the recent addition of a new plugin `datadog`, and gives detailed instructions on how to integrate [Datadog](https://www.datadoghq.com/), which is a widely used monitoring and analysis tool, into the Apache APISIX monitoring suite.
 
 ## Introducing Apache APISIX
 
-[Apache APISIX](https://apisix.apache.org/) is a dynamic, real-time, high-performance API gateway that provides load balancing, dynamic upstream, canary release, fine-grained routing, rate limiting, service degradation, circuit breaking, authentication, observability, and hundreds of other features. In addition, the gateway supports dynamic plugin changes along with hot-loading. Apache APISIX can be used to proxy traditional NORTH-SOUTH traffic, as well as EAST-WEST traffic between services, or as a k8s ingress controller. The datadog plugin for Apache APISIX allows users to export valuable metrics to [DatadogHQ](https://app.datadoghq.com/) to have a holistic lookup along with the incticate details of the microservice mesh.
+[Apache APISIX](https://apisix.apache.org/) is a dynamic, real-time, high-performance API gateway that provides load balancing, dynamic upstream, canary release, fine-grained routing, rate limiting, service degradation, circuit breaking, authentication, observability, and hundreds of other features. In addition, the gateway supports dynamic plugin changes along with hot-loading. Apache APISIX can be used to proxy traditional NORTH-SOUTH traffic, as well as EAST-WEST traffic between services, or as a k8s ingress controller. The datadog plugin for Apache APISIX allows users to export valuable metrics to [DatadogHQ](https://app.datadoghq.com/) to have a holistic lookup along with the intricate details of the microservice mesh.
 
 ## Introducing Datadog
 
-[Datadog](https://www.datadoghq.com/) is a _Cloud Monitoring as a Service_ solution for observability in cloud-scale applications providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform. As of Q1-2021 ([source](https://businessquant.com/datadog-number-of-customers-worldwide)), more than 15 thousand customers uses Datadog for distributed monitoring and security.
+[[Datadog](https://www.datadoghq.com/) is a _Cloud Monitoring as a Service_ solution for observability in cloud-scale applications providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform. As of Q1-2021 ([source](https://businessquant.com/datadog-number-of-customers-worldwide)), more than 15,000 customers uses Datadog for distributed monitoring and security.
 
 ## Demystifying Observability & Monitoring
 
-In software, `Observability` refers to the telemetry produced by services. There are three pillars of observability - Logs, Metrics & Traces. While `Monitoring` refers to collecting, processing, aggregating, and displaying real-time quantitative data about a system, such as query counts and types, error counts and types, processing times, and server lifetimes. In general, what we know by monitoring is actually `Whitebox-Monitoring` which is the monitoring based on the metrics exposed by the internals of the system. We often do consult a dashboard (usually a web UI) that provides the summary view of the service's core metrics. Monitoring is crucial for analyzing long term trends, alerting and building dashboards. In a nutshell, Observability is achieved when data/useful information is collected from the system that you wish to monitor and monitoring is the actual task of collecting and displaying the data.
+In software, `Observability` refers to the telemetry produced by services. There are three pillars of observability - Logs, Metrics, and Traces. While `Monitoring` refers to collecting, processing, aggregating, and displaying real-time quantitative data about a system, such as query counts and types, error counts and types, processing times, and server lifetimes. In general, what we know by monitoring is actually `Whitebox-Monitoring` which is the monitoring based on the metrics exposed by the internals of the system. We often do consult a dashboard (usually a web UI) that provides the summary view of the service's core metrics. Monitoring is crucial for analyzing long term trends, alerting and building dashboards. In a nutshell, Observability is achieved when data/useful information is collected from the system that you wish to monitor and monitoring is the actual task of collecting and displaying the data.
 
 ## About APISIX-Datadog Plugin
 
-The datadog plugin pushes its custom metrics to the DogStatsD server, comes bundled with Datadog agent over the UDP connection. DogStatsD basically is an implementation of StatsD protocol which collects the custom metrics for Apache APISIX agent, aggregates it into a single data point and sends it to the configured Datadog server.
+The `datadog` plugin pushes its custom metrics to the DogStatsD server, comes bundled with Datadog agent over the UDP connection. DogStatsD basically is an implementation of StatsD protocol which collects the custom metrics for Apache APISIX agent, aggregates it into a single data point and sends it to the configured Datadog server. To learn more about DogStatsD, please visit [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent) documentation.
 
-> To learn more about DogStatsD, please visit [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent) documentation.
-
-Apache APISIX agent, for every request response cycle, export the following metrics to DogStatsD server if the datadog plugin is enabled:
+Apache APISIX agent exports the following metrics to DogStatsD server for every request response cycle, if the datadog plugin is enabled:
 
 | Metric Name          | StatsD Type | Description                                                                                                 |
 | -------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
@@ -50,18 +49,16 @@ Apache APISIX agent, for every request response cycle, export the following metr
 | **Ingress Size**     | Timer       | Request body size in bytes.                                                                                 |
 | **Egress Size**      | Timer       | Response body size in bytes.                                                                                |
 
-The metrics will be sent to the DogStatsD agent with the following tags:
-
-> If there is no suitable value for any particular tag, the tag will simply be omitted.
+The metrics will be sent to the DogStatsD agent with the following tags. If there is no suitable value for any particular tag, the tag will simply be omitted.
 
 - **route_name**: Name specified in the route schema definition. If not present, it will fall back to the route id value.
 - **service_id**: If a route has been created with the abstraction of service, the particular service id will be used.
 - **consumer**: If the route has a linked consumer, the consumer Username will be added as a tag.
 - **balancer_ip**: IP of the Upstream balancer that has processed the current request.
 - **response_status**: HTTP response status code.
-- **scheme**: Scheme that has been used to make the request. e.g. HTTP, gRPC, gRPCs etc.
+- **scheme**: Scheme that has been used to make the request, such as HTTP, gRPC, gRPCs etc.
 
-The plugin internally maintains a buffer with a timer, and periodically when the timer expires, it flashes the buffered metrics as a batch to the locally run dogstatsd server. This approach is less resource-hungry (though it might be insignificant as UDP sockets are very lightweight) by reusing the same UDP socket and doesn't overload the network all the time as the timer can be configured.
+The plugin maintains a buffer with a timer. Periodically, when the timer expires, it flashes the buffered metrics as a batch to the locally run dogstatsd server. This approach is less resource-hungry (though it might be insignificant as UDP sockets are very lightweight) by reusing the same UDP socket and doesn't overload the network all the time as the timer can be configured.
 
 ### Steps to Run Datadog Agent
 
@@ -70,12 +67,11 @@ The plugin internally maintains a buffer with a timer, and periodically when the
 > To learn more about how to install a full-fledged datadog agent, visit [here](https://docs.datadoghq.com/agent/).
 
 2. If you are new to Datadog  
-   a. First create an account by visiting [www.datadoghq.com](https://www.datadoghq.com/).  
+   a. First, create an account by visiting [www.datadoghq.com](https://www.datadoghq.com/).  
    b. Generate an API Key following the steps demonstrated below
     <div className="flex flex-wrap justify-center -mx-2 overflow-hidden xl:-mx-2 py-0" >
         <img alt="datadog" src="/static/images/datadog-how-to-api-key.png" width={828} height={425 } />
     </div>
-    <h6 className="text-center py-0 text-xs	 -mx-2 italic"> Visit [app.datadoghq.com/organization-settings/api-keys](https://app.datadoghq.com/organization-settings/api-keys) </h6>
 
 3. Apache APISIX datadog plugin requires only the `dogstatsd` component of `datadog/agent` as the plugin asynchronously send metrics to the dogstatsd server following the statsd protocol over standard UDP socket. That's why APISIX recommends using the standalone `datadog/dogstatsd` image ([link](https://hub.docker.com/r/datadog/dogstatsd)) instead of using the full agent. It's extremely lightweight (only ~11 MB in size) compared to ~2.8GB of `datadog/agent` image.
 
@@ -92,7 +88,7 @@ Also, if you using `Kubernetes` in your production environment, you can deploy d
 
 ### How to Use
 
-The following is an example on how to **enable** the datadog plugin for a specific route. We are assumming your dogstatsd agent is already up an running.
+The following is an example of how to **enable** the datadog plugin for a specific route. We are assuming your dogstatsd agent is already up and running.
 
 ```shell
 # enable plugin for a specific route
@@ -111,10 +107,10 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-Now any requests to endpoint uri `/hello` will generate aforesaid metrics and push it to local DogStatsD server of the datadog agent.
+Now any requests to endpoint uri `/hello` will generate aforesaid metrics and push them to the local DogStatsD server of the datadog agent.
 
 Now, to **disable** the plugin simply remove the corresponding json configuration in the plugin configuration to disable the `datadog`.
-APISIX plugins are hot-reloaded, therefore no need to restart APISIX.
+APISIX plugins are hot-loaded, therefore there is no need to restart APISIX.
 
 ```shell
 # disable plugin for a route
@@ -133,7 +129,7 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 ### Custom Configuration
 
-In default configuration, the plugin expects the dogstatsd service to be available at `127.0.0.1:8125`. If you wish to update the config, please update the plugin metadata -
+In the default configuration, the plugin expects the dogstatsd service to be available at `127.0.0.1:8125`. If you wish to update the config, please update the plugin metadata:
 
 #### Metadata Schema
 
@@ -146,7 +142,7 @@ In default configuration, the plugin expects the dogstatsd service to be availab
 
 > To know more about how to effectively write tags, please visit [here](https://docs.datadoghq.com/getting_started/tagging/#defining-tags)
 
-Make a request to _/apisix/admin/plugin_metadata_ endpoint with the updated metadata as following
+Make a request to _/apisix/admin/plugin_metadata_ endpoint with the updated metadata as following:
 
 ```shell
 $ curl http://127.0.0.1:9080/apisix/admin/plugin_metadata/datadog -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
@@ -161,7 +157,7 @@ $ curl http://127.0.0.1:9080/apisix/admin/plugin_metadata/datadog -H 'X-API-KEY:
 }'
 ```
 
-Similarly there are few attributes that can be tweaked while enabling the plugin.
+Similarly there are a few attributes that can be tweaked while enabling the plugin.
 
 #### Plugin Schema
 
@@ -172,7 +168,7 @@ Similarly there are few attributes that can be tweaked while enabling the plugin
 | **buffer_duration**  | integer | optional    | `60`    | [1,...] | Maximum age in seconds of the oldest entry in a batch before the batch must be processed |
 | **max_retry_count**  | integer | optional    | `1`     | [1,...] | Maximum number of retries if one entry fails to reach dogstatsd server                   |
 
-As all the fields are optional and if no attributes are set, the datadog plugin gets instantiated with the default values. To update any attribute, just update the required route/service/consumer with the updated attribute value. e.g.
+As all the fields are optional and if no attributes are set, the datadog plugin gets instantiated with the default values. To update any attribute, just update the required route/service/consumer with the updated attribute value, for example:
 
 ```shell
 '{
