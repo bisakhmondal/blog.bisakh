@@ -60,6 +60,12 @@ The metrics will be sent to the DogStatsD agent with the following tags. If ther
 
 The plugin maintains a buffer with a timer. Periodically, when the timer expires, it flashes the buffered metrics as a batch to the locally run dogstatsd server. This approach is less resource-hungry (though it might be insignificant as UDP sockets are very lightweight) by reusing the same UDP socket and doesn't overload the network all the time as the timer can be configured.
 
+### Metrics Flow View
+
+<div className="flex flex-wrap justify-center -mx-2 overflow-hidden xl:-mx-2 py-0" >
+    <Image alt="datadog" src="/static/images/datadog-draw.io.svg" width={481} height={523} />
+</div>
+
 ### Steps to Run Datadog Agent
 
 1. If you are already using Datadog inside your infrastructure, you must have a datadog agent installed in your systems. It may either be a docker container, pod or binary for a respective package manager. In this case, you are good to go. Just make sure port `8125/udp` is allowed through the firewall (if any) i.e more specifically, the Apache APISIX agent can reach port 8125 of the datadog agent. You may skip this subsection.
@@ -70,7 +76,7 @@ The plugin maintains a buffer with a timer. Periodically, when the timer expires
    a. First, create an account by visiting [www.datadoghq.com](https://www.datadoghq.com/).  
    b. Generate an API Key following the steps demonstrated below
     <div className="flex flex-wrap justify-center -mx-2 overflow-hidden xl:-mx-2 py-0" >
-        <img alt="datadog" src="/static/images/datadog-how-to-api-key.png" width={828} height={425 } />
+        <Image alt="datadog" src="/static/images/datadog-how-to-api-key.png" width={974} height={500 } />
     </div>
 
 3. Apache APISIX datadog plugin requires only the `dogstatsd` component of `datadog/agent` as the plugin asynchronously send metrics to the dogstatsd server following the statsd protocol over standard UDP socket. That's why APISIX recommends using the standalone `datadog/dogstatsd` image ([link](https://hub.docker.com/r/datadog/dogstatsd)) instead of using the full agent. It's extremely lightweight (only ~11 MB in size) compared to ~2.8GB of `datadog/agent` image.
@@ -108,6 +114,12 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 ```
 
 Now any requests to endpoint uri `/hello` will generate aforesaid metrics and push them to the local DogStatsD server of the datadog agent.
+
+Now the result Dashboard at Datadog server:
+
+<div className="flex flex-wrap justify-center -mx-2 overflow-hidden xl:-mx-2 py-0" >
+     <Image alt="datadog-stat" src="/static/images/stat.png" width={982} height={500 } />
+ </div>
 
 Now, to **disable** the plugin simply remove the corresponding json configuration in the plugin configuration to disable the `datadog`.
 APISIX plugins are hot-loaded, therefore there is no need to restart APISIX.
