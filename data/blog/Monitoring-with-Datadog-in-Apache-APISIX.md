@@ -28,7 +28,7 @@ As the complexity of IT products and consumer-facing application development inc
 
 ## Introducing Datadog
 
-[[Datadog](https://www.datadoghq.com/) is a _Cloud Monitoring as a Service_ solution for observability in cloud-scale applications providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform. As of Q1-2021 ([source](https://businessquant.com/datadog-number-of-customers-worldwide)), more than 15,000 customers uses Datadog for distributed monitoring and security.
+[Datadog](https://www.datadoghq.com/) is a _Cloud Monitoring as a Service_ solution for observability in cloud-scale applications providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform. As of Q1-2021 ([source](https://businessquant.com/datadog-number-of-customers-worldwide)), more than 15,000 customers uses Datadog for distributed monitoring and security.
 
 ## Demystifying Observability & Monitoring
 
