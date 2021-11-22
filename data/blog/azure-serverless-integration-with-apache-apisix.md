@@ -175,17 +175,17 @@ In a minimal configuration while creating a new route with the azure-functions p
 
 #### Plugin Schema
 
-| Name                   | Type    | Requirement | Default | Valid      | Description                                                                                                                         |
-| ---------------------- | ------- | ----------- | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- | --- |
-| function_uri           | string  | required    |         |            | The azure function endpoint which triggers the serverless function code (eg. http://test-apisix.azurewebsites.net/api/HttpTrigger). |
-| authorization          | object  | optional    |         |            | Authorization credentials to access the cloud function.                                                                             |
-| authorization.apikey   | string  | optional    |         |            | Field inside _authorization_. The generate API Key to authorize requests to that endpoint.                                          |     |
-| authorization.clientid | string  | optional    |         |            | Field inside _authorization_. The Client ID ( azure active directory ) to authorize requests to that endpoint.                      |     |
-| timeout                | integer | optional    | 3000    | [100,...]  | Proxy request timeout in milliseconds.                                                                                              |
-| ssl_verify             | boolean | optional    | true    | true/false | If enabled performs SSL verification of the server.                                                                                 |
-| keepalive              | boolean | optional    | true    | true/false | To reuse the same proxy connection in near future. Set to false to disable keepalives and immediately close the connection.         |
-| keepalive_pool         | integer | optional    | 5       | [1,...]    | The maximum number of connections in the pool.                                                                                      |
-| keepalive_timeout      | integer | optional    | 60000   | [1000,...] | The maximal idle timeout (ms).                                                                                                      |
+| Name             | Type   | Requirement  | Default      | Valid       | Description                                                                                |
+| -----------      | ------ | -----------  | -------      | -----       | ------------------------------------------------------------                               |
+| function_uri      | string | required    |          |   | The azure function endpoint which triggers the serverless function code (eg. http://test-apisix.azurewebsites.net/api/HttpTrigger).   |
+| authorization   | object | optional    |         |     |  Authorization credentials to access the cloud function.                                                             |
+| authorization.apikey | string | optional    |             |     | Field inside _authorization_. The generate API Key to authorize requests to that endpoint. |                         |
+| authorization.clientid | string | optional    |             |     | Field inside _authorization_. The Client ID ( azure active directory ) to authorize requests to that endpoint. |                         |
+| timeout  | integer | optional    | 3000           | [100,...]     | Proxy request timeout in milliseconds.   |
+| ssl_verify  | boolean | optional    | true           | true/false     | If enabled performs SSL verification of the server.                     |
+| keepalive  | boolean | optional    | true           | true/false     | To reuse the same proxy connection in near future. Set to false to disable keepalives and immediately close the connection.                    |
+| keepalive_pool  | integer | optional    | 5          | [1,...]     | The maximum number of connections in the pool.              |
+| keepalive_timeout  | integer | optional    | 60000           | [1000,...]     |  The maximal idle timeout (ms).                     |
 
 This gives a whole lot of flexibility to tightly bind the behaviour of the azure faas - from configuring the timeout to the keepalive pool and validating the SSL certificate of the serverless faas. To be honest, this actually means a lot when it comes to serverless as the services are event-driven and resources are being allocated by the cloud provider on the fly.
 
