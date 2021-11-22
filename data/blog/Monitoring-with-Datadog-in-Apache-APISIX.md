@@ -1,8 +1,8 @@
 ---
 title: 'Monitoring with Datadog in Apache APISIX'
 date: '2021-11-08'
-lastmod: '2021-11-09'
-tags: ['datadog', 'dogstatsd', 'monitoring', 'open-source', 'Apache', 'APISIX']
+lastmod: '2021-11-23'
+tags: ['datadog', 'dogstatsd', 'monitoring', 'open-source', 'Apache', 'APISIX', 'Lua']
 draft: false
 layout: PostSimple
 images: ['/static/images/datadog.png']
@@ -198,3 +198,4 @@ As all the fields are optional and if no attributes are set, the datadog plugin 
 #### Related pull request
 
 ✅ [PR#5372](https://github.com/apache/apisix/pull/5372) feat(plugins): Datadog for metrics collection
+✅ [PR#5463](https://github.com/apache/apisix/pull/5463) feat: introducing prefer_name attribute in datadog plugin
