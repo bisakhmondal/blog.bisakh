@@ -195,7 +195,8 @@ As all the fields are optional and if no attributes are set, the datadog plugin 
 
 <hr />
 
-#### Related pull request
+## Related pull request
 
 ✅ [PR#5372](https://github.com/apache/apisix/pull/5372) feat(plugins): Datadog for metrics collection
+
 ✅ [PR#5463](https://github.com/apache/apisix/pull/5463) feat: introducing prefer_name attribute in datadog plugin
