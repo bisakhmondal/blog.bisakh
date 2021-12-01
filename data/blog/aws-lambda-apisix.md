@@ -50,7 +50,7 @@ In recent years, everything is moving into the cloud. With the emergence of micr
 
 `Serverless` is a cloud computing execution model where the cloud vendor runs the server by dynamically managing the allocation and deallocation of hardware resources so that the end-users can just focus on the main business logic aka the actual code that is going to be executed. Here, the logic runs as a function and there are two important traits of these functions - they are **stateless**, i.e. function instances are created and destroyed on demand so there should not be any in-memory states and they are **event-driven** that means the piece of code aka functions get executed via a triggering signal. These triggers could be HTTP requests, file upload to blob storage or the addition of new rows on cloud-SQL. So the benefits are:
 
-- Easy deployment: The serverless framework needs no manual provisioning of the VM or compute instances as everything has been abstracted into functions and the cloud provider manages the infrastructure.
+- Easy deployment: The serverless framework needs no manual provisioning of the VM or computes instances as everything has been abstracted into functions and the cloud provider manages the infrastructure.
 - Highly Scalable and Cost-Effective: The function application is automatically scaled up or down depending on the network traffic or load. So this is a cost-effective solution that leads to a shift from VM to serverless for the services which are less frequently invoked. But there is no such thing as free lunch. If the application gets bombarded by multiple clients, deploying a compute instance VM might be a cheaper alternative.
 
 ## About aws-lambda Plugin
@@ -101,7 +101,7 @@ The plugin is capable of handling authorization via api keys and AWS IAM access 
 
 ### Plugin with Authorization via API-KEY
 
-If the authorization schema of the aws-lambda APISIX plugin is set with a string value, the plugin by-default uses it, as the process is less resource intensive compared to authorization via IAM access keys through aws v4 request signing.
+If the authorization schema of the aws-lambda APISIX plugin is set with a string value, the plugin by default uses it, as the process is less resource-intensive compared to authorization via IAM access keys through aws v4 request signing.
 
 ```shell
 # enable plugin for a specific route
@@ -155,7 +155,7 @@ server: APISIX/2.10.2
 
 ### Plugin with Authorization via AWS IAM Access Secrets
 
-`aws-lambda` plugin also supports authorization of the lambda resources via AWS IAM access keys. This requires an IAM access key which is generated from the AWS web console or any third party plugin that can generate access keys on behalf of the AWS root user (of course thorugh another IAM). To create an APISIX route with the IAM authorization, see the example:
+`aws-lambda` plugin also supports the authorization of the lambda resources via AWS IAM access keys. This requires an IAM access key which is generated from the AWS web console or any third-party plugin that can generate access keys on behalf of the AWS root user (of course through another IAM). To create an APISIX route with the IAM authorization, see the example:
 
 ```shell
 # enable aws lambda for a route via iam authorization
@@ -177,7 +177,7 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-Upon receiving any request to the `/aws` endpoint the plugin perform AWS V4 request signing ([see more](#-what-is-aws-signature-v4-)) with the IAM access key and add the unique hexadecimally encoded signature to proxy request `Authorization` header with a predetermined format as per AWS documentation. On the AWS side the AWS API gateway recomputes the same SHA-256 hash with the HMAC algorithm and verifies the identify of the request and provides the intended authorization.
+Upon receiving any request to the `/aws` endpoint the plugin performs AWS V4 request signing ([see more](#-what-is-aws-signature-v4-)) with the IAM access key and add the unique hexadecimally encoded signature to the proxy request `Authorization` header with a predetermined format as per AWS documentation. On the AWS side, the AWS API gateway recomputes the same SHA-256 hash with the HMAC algorithm and verifies the identity of the request and provides the intended authorization.
 
 If you are a beginner and want to try how to achieve the whole thing, follow the guidance described below:
 
@@ -186,13 +186,13 @@ If you are a beginner and want to try how to achieve the whole thing, follow the
 
 2. Next when prompted to a form give this IAM key a suitable name and give tick on `Access key - Programmatic access`
 
-3. On the permissions window give the IAM user access to the `AmazonAPIGatewayInvokeFullAccess` policy. You may also choose to provide any lower level access privileges.
+3. On the permissions window give the IAM user access to the `AmazonAPIGatewayInvokeFullAccess` policy. You may also choose to provide any lower-level access privileges.
 
   <div className="flex flex-wrap justify-center">
      <Image quality={100} alt="aws-iam"  src="/static/images/aws/iam-2.png" width={750} height={335} />
   </div>
 
-That's it. You may now copy the `Access key ID` and `Secret access key` from the web console and pass it to the APISIX route schema.
+That's it. You may now copy the `Access key ID` and `Secret access key` from the web console and pass them to the APISIX route schema.
 
 ### Disabling Plugin
 
@@ -219,37 +219,37 @@ In a minimal configuration while creating a new route with the aws-lambda plugin
 
 ### Plugin Schema
 
-| Name                 | Type    | Requirement | Default | Valid      | Description                                                                                                                                                         |
-| -------------------- | ------- | ----------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| function_uri         | string  | required    |         |            | The AWS api gateway endpoint which triggers the lambda serverless function code.                                                                                    |
-| authorization        | object  | optional    |         |            | Authorization credentials to access the cloud function.                                                                                                             |
-| authorization.apikey | string  | optional    |         |            | Field inside _authorization_. The generate API Key to authorize requests to that endpoint of the AWS gateway.                                                       |     |
-| authorization.iam    | object  | optional    |         |            | Field inside _authorization_. AWS IAM role based authorization, performed via AWS v4 request signing. See schema details below ([here](#iam-authorization-schema)). |     |
-| timeout              | integer | optional    | 3000    | [100,...]  | Proxy request timeout in milliseconds.                                                                                                                              |
-| ssl_verify           | boolean | optional    | true    | true/false | If enabled performs SSL verification of the server.                                                                                                                 |
-| keepalive            | boolean | optional    | true    | true/false | To reuse the same proxy connection in near future. Set to false to disable keepalives and immediately close the connection.                                         |
-| keepalive_pool       | integer | optional    | 5       | [1,...]    | The maximum number of connections in the pool.                                                                                                                      |
-| keepalive_timeout    | integer | optional    | 60000   | [1000,...] | The maximal idle timeout (ms).                                                                                                                                      |
+| Name             | Type   | Requirement  | Default      | Valid       | Description                                                                                |
+| -----------      | ------ | -----------  | -------      | -----       | ------------------------------------------------------------                               |
+| function_uri      | string | required    |          |   | The AWS api gateway endpoint which triggers the lambda serverless function code.   |
+| authorization   | object | optional    |         |     |  Authorization credentials to access the cloud function.                                                             |
+| authorization.apikey | string | optional    |             |     | Field inside _authorization_. The generate API Key to authorize requests to that endpoint of the AWS gateway. |                         |
+| authorization.iam | object | optional    |             |     | Field inside _authorization_. AWS IAM role based authorization, performed via AWS v4 request signing. See schema details below ([here](#iam-authorization-schema)). |                         |
+| timeout  | integer | optional    | 3000           | [100,...]     | Proxy request timeout in milliseconds.   |
+| ssl_verify  | boolean | optional    | true           | true/false     | If enabled performs SSL verification of the server.                     |
+| keepalive  | boolean | optional    | true           | true/false     | To reuse the same proxy connection in near future. Set to false to disable keepalives and immediately close the connection.                    |
+| keepalive_pool  | integer | optional    | 5          | [1,...]     | The maximum number of connections in the pool.              |
+| keepalive_timeout  | integer | optional    | 60000           | [1000,...]     |  The maximal idle timeout (ms).                     |
 
 #### IAM Authorization Schema
 
-| Name       | Type   | Requirement | Default       | Valid | Description                                                                              |
-| ---------- | ------ | ----------- | ------------- | ----- | ---------------------------------------------------------------------------------------- |
-| accesskey  | string | required    |               |       | Generated access key ID from AWS IAM console.                                            |
-| secret_key | string | required    |               |       | Generated access key secret from AWS IAM console.                                        |
-| aws_region | string | optional    | "us-east-1"   |       | The AWS region where the request is being sent.                                          |
-| service    | string | optional    | "execute-api" |       | The service that is receiving the request (In case of Http Trigger it is "execute-api"). |
+| Name       | Type   | Requirement | Default       | Valid | Description                                                                                  |
+| ---------- | ------ | ----------- | ------------- | ----- | -------------------------------------------------------------------------------------------- |
+| accesskey  | string | required    |               |       | Generated access key ID from AWS IAM console.                                                |
+| secret_key | string | required    |               |       | Generated access key secret from AWS IAM console.                                            |
+| aws_region | string | optional    | "us-east-1"   |       | The AWS region where the request is being sent.                                              |
+| service    | string | optional    | "execute-api" |       | The service that is receiving the request (In the case of HTTP Trigger it is "execute-api"). |
 
-This gives a whole lot of flexibility to tightly bind the behaviour of the aws lambda faas - from configuring the timeout to the keepalive pool and validating the SSL certificate of the serverless faas. To be honest, this actually means a lot when it comes to serverless as the services are event-driven and resources are being allocated by the cloud provider on the fly.
+This gives a whole lot of flexibility to tightly bind the behaviour of the AWS lambda faas - from configuring the timeout to the keepalive pool and validating the SSL certificate of the serverless faas. To be honest, this actually means a lot when it comes to serverless as the services are event-driven and resources are being allocated by the cloud provider on the fly.
 
 ### >> What is AWS Signature V4 ?
 
-If you are using APISIX aws-lambda plugin, internally it performs request signing via AWS Signature V4 to authorize requests via AWS API Gateway, an endpoint which triggers your lambda code. This section describes how this is done from the APISIX side.  
-The signing process helps securing requests in multiple ways:
+If you are using APISIX aws-lambda plugin, internally it performs request signing via AWS Signature V4 to authorize requests via AWS API Gateway, an endpoint that triggers your lambda code. This section describes how this is done from the APISIX side.  
+The signing process helps secure requests in multiple ways:
 
-1. It verifies the identity of the request user. Acts as an authentication alternatives as you know which IAM key has been used to sign the request.
-2. Protecting data over the wire. The generated signature is produced from a complex process where in one step the string which needs to be signed contains the request body data. Then an HMAC has been perfomed with the SHA-256 algorithm to generate the signature digest.
-3. It helps protecting against replay attacks. The request contains an extra header `X-Amz-Date` which contains the datestamp when the request has been signed. So to prevent from replay attacks, aws just allow requests which has been signed within five minutes (in most cases).
+1. It verifies the identity of the requesting user. Acts as an authentication alternative as you know which IAM key has been used to sign the request.
+2. Protecting data over the wire. The generated signature is produced from a complex process wherein one step the string which needs to be signed contains the request body data. Then an HMAC has been performed with the SHA-256 algorithm to generate the signature digest.
+3. It helps protect against replay attacks. The request contains an extra header `X-Amz-Date` which contains the date stamp when the request has been signed. So to prevent from replay attacks, aws just allows requests which have been signed within five minutes (in most cases).
 
 #### Request Signing Algorithm
 
